@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+@model BooksViewModel
+
+@foreach (Book b in Model.Books)
+            {
+               <h3>@b.Title</h3>
+               <ul>
+                   <li>@b.Author</li>
+                   <li>@b.Publisher</li>
+                   <li>@b.Category</li>
+                   <li>@b.Price</li>
+               </ul>
+            }
+<div page-variable="@Model.PageInfo"></div>

@@ -8,8 +8,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineBookStore.Models
 {
-    public partial class Books
+    public partial class Book
     {
+        [Key]
         [Required]
         public long BookId { get; set; }
         public string Title { get; set; }
