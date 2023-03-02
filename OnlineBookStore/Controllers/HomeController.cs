@@ -15,7 +15,7 @@ namespace OnlineBookStore.Controllers
         public HomeController(IBookstoreRepository bookstorerepository) => repo = bookstorerepository;
         public IActionResult Index(int page_num = 1)
         {
-            int results_per_page = 5;
+            int results_per_page = 10;
 
 
             var x = new BooksViewModel
