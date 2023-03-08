@@ -13,7 +13,7 @@ namespace OnlineBookStore.Controllers
         private IBookstoreRepository repo;
 
         public HomeController(IBookstoreRepository bookstorerepository) => repo = bookstorerepository;
-        public IActionResult Index(int page_num = 1)
+        public IActionResult Index(string category, int page_num = 1)
         {
             int results_per_page = 10;
 
@@ -21,13 +21,17 @@ namespace OnlineBookStore.Controllers
             var x = new BooksViewModel
             {
                 Books = repo.Books
+                .Where(b => b.Category == category || category == null)
                 .OrderBy(b => b.Title)
                 .Skip((page_num - 1) * results_per_page)
-                .Take(10),
+                .Take(results_per_page),
 
                 PageInfo = new PageInfo
                 {
-                    TotalBookCount = repo.Books.Count(),
+                    TotalBookCount = 
+                        (category == null 
+                        ? repo.Books.Count() 
+                        : repo.Books.Where(b => b.Category == category).Count()),
                     ResultsPerPage = results_per_page,
                     CurrentPage = page_num
                 }

@@ -33,6 +33,9 @@ namespace OnlineBookStore
             });
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
             // Above is where we will do the repo stuff        
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,11 +46,25 @@ namespace OnlineBookStore
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                // Catches case when category and page are passed
+                endpoints.MapControllerRoute("categorypage", "{category}/Page{page_num}",
+                new { Controller = "Home", action = "Index" });
+
+                // Catches case when there is only a page passed
+                endpoints.MapControllerRoute("paging", "Page{page_num}",
+                    new { Controller = "Home", action = "Index", page_num =1 });
+
+                // Catches case when only category passed
+                endpoints.MapControllerRoute("category", "{category}",
+                    new { Controller = "Home", action = "Index", page_num = 1 });
+
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,0 +1,41 @@
+﻿@page
+@model OnlineBookStore.Pages.ShoppingCartModel
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+<h2>View Your Shopping Cart</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var i in Model.cart.BookList)
+        {
+            <tr>
+                <td>@i.Book.Title</td>
+                <td>@i.Quantity</td>
+                <td>@i.Book.Price.ToString("c")</td>
+                <td>@Math.Round((i.Quantity* i.Book.Price),2).ToString("c")</td>
+            </tr>
+        }
+
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3" class="fw-bold text-uppercase text-end">Total:</td>
+            <td>@Model.cart.CalculateTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div>
+    <a class="btn btn-primary " href="@Model.ReturnUrl">Click here to keep donating!</a>
+</div>
