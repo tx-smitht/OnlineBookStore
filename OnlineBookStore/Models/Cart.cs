@@ -63,7 +63,8 @@ namespace OnlineBookStore.Models
         }
     }
 
-
+    // This is where we create the class to handle line items.  It is thru this
+    // that the PK/FK relationship is built with the line items, books, purchases.
     public class CartLineItem
     {
         [Key]

@@ -20,6 +20,9 @@ namespace OnlineBookStore.Models
         }
 
         public virtual DbSet<Book> Books { get; set; }
+        // this is the file that coordinates the connection to the database, 
+        // this is what tells migrations what to include.
+        public virtual DbSet<Purchase> Purchases { get; set; }
 
     }
 }
