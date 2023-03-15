@@ -20,6 +20,8 @@ namespace OnlineBookStore.Controllers
 
             var x = new BooksViewModel
             {
+                // The total number of books is set to the amount of books there are if given
+                // a book category. If not given a book category, then it is the total number of books
                 Books = repo.Books
                 .Where(b => b.Category == category || category == null)
                 .OrderBy(b => b.Title)

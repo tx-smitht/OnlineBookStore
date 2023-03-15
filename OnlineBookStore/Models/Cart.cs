@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace OnlineBookStore.Models
         // First part declares, second part instatiates. 
         public List<CartLineItem> BookList { get; set; } = new List<CartLineItem>();
 
-        public void AddItem(Book book, int qty)
+        public virtual void AddItem(Book book, int qty)
         {
             // Go search the current cart list and find the book associated with that book's ID
             CartLineItem line = BookList
@@ -37,6 +38,17 @@ namespace OnlineBookStore.Models
                 line.Quantity += qty;
             }
         }
+
+        public virtual void RemoveItem(Book book)
+        {
+            BookList.RemoveAll(x => x.Book.BookId == book.BookId);
+        }
+
+        public virtual void ClearCart()
+        {
+            BookList.Clear();
+        }
+
         public double CalculateTotal()
         {
             double sum = 0;
@@ -54,6 +66,7 @@ namespace OnlineBookStore.Models
 
     public class CartLineItem
     {
+        [Key]
         public int LineID { get; set; }
         public Book Book { get; set; }
         public int Quantity { get; set; }

@@ -18,12 +18,19 @@
     <tbody>
         @foreach (var i in Model.cart.BookList)
         {
-            <tr>
-                <td>@i.Book.Title</td>
-                <td>@i.Quantity</td>
-                <td>@i.Book.Price.ToString("c")</td>
-                <td>@Math.Round((i.Quantity* i.Book.Price),2).ToString("c")</td>
-            </tr>
+        <tr>
+            <td>@i.Book.Title</td>
+            <td>@i.Quantity</td>
+            <td>@i.Book.Price.ToString("c")</td>
+            <td>@Math.Round((i.Quantity * i.Book.Price), 2).ToString("c")</td>
+            <td class="text-center">
+                <form asp-page-handler="Remove">
+                    <input type="hidden" name="BookId" value="@i.Book.BookId" />
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
         }
 
     </tbody>

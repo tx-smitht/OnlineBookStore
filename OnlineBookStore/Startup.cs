@@ -36,6 +36,10 @@ namespace OnlineBookStore
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            // If cart has already been set up it will grab it. If not, it will create a new one
+            services.AddScoped<Cart>(x => SessionCart.GetCart(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
