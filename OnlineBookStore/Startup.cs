@@ -32,8 +32,12 @@ namespace OnlineBookStore
                 options.UseSqlite(Configuration["ConnectionStrings:BookstoreDBConnection"]);
             });
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
-            // Above is where we will do the repo stuff        
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
+            // Above is where we will do the repo stuff
+
+            // Add Razor page functionality
             services.AddRazorPages();
+
             services.AddDistributedMemoryCache();
             services.AddSession();
 
