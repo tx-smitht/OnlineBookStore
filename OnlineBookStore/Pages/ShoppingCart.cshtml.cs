@@ -12,7 +12,7 @@ namespace OnlineBookStore.Pages
     public class ShoppingCartModel : PageModel
     {
         // Bring in the data side of things with the repo.
-        // Need this to get the project ID
+        // Need this to get the book ID
         private IBookstoreRepository repo { get; set; }
         public Cart cart { get; set; }
         public string ReturnUrl { get; set; }

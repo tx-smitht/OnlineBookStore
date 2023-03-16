@@ -15,8 +15,8 @@ namespace OnlineBookStore.Models
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
-            // This goes out and looks in the session for a thing called basket.
-            // If there isnt, a new session basket is created. 
+            // This goes out and looks in the session for a thing called cart.
+            // If there isnt, a new session cart is created. 
             SessionCart cart = session?.GetJson<SessionCart>("Cart") ?? new SessionCart();
 
             cart.Session = session;
@@ -41,7 +41,7 @@ namespace OnlineBookStore.Models
         public override void ClearCart()
         {
             base.ClearCart();
-            Session.Remove("Basket");
+            Session.Remove("Cart");
         }
 
     }
