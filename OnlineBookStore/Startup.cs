@@ -29,7 +29,8 @@ namespace OnlineBookStore
             services.AddControllersWithViews();
             services.AddDbContext<BookstoreContext>(options =>
             {
-                options.UseSqlite(Configuration["ConnectionStrings:BookstoreDBConnection"]);
+                //options.UseSqlite(Configuration["ConnectionStrings:BookstoreDBConnection"]);
+                options.UseNpgsql(Configuration["ConnectionStrings:ASP_postgres"]);
             });
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
             services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();

@@ -1,18 +1,38 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace OnlineBookStore.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    BookId = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(nullable: false),
+                    Author = table.Column<string>(nullable: false),
+                    Publisher = table.Column<string>(nullable: false),
+                    Isbn = table.Column<string>(nullable: false),
+                    Classification = table.Column<string>(nullable: false),
+                    Category = table.Column<string>(nullable: false),
+                    PageCount = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.BookId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Purchases",
                 columns: table => new
                 {
                     PurchaseId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     AddressLine1 = table.Column<string>(nullable: false),
@@ -33,7 +53,7 @@ namespace OnlineBookStore.Migrations
                 columns: table => new
                 {
                     LineID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BookId = table.Column<int>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     PurchaseId = table.Column<int>(nullable: true)
